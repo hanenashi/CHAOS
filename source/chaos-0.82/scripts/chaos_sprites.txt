@@ -1,0 +1,7 @@
+# <NAME> <W> <H> <IsRot> <DataName> <X> <Y> <IsTrans> <SpriteCount> (optional: name)
+cursor_engaged 16 16 F cursor_engaged 0 106 F 1 cursor_normal
+cursor_fire 16 16 F cursor_fire 0 106 F 1 cursor_normal
+cursor_fly 16 16 F cursor_fly 0 106 F 1 cursor_normal
+cursor_ground 16 16 F cursor_ground 0 106 F 1 cursor_normal
+cursor_normal 16 16 F cursor 0 106 F 1
+end 0 0 F end 0 0 F 1 

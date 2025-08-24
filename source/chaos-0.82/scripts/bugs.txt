@@ -1,0 +1,115 @@
+New bugs, missing, differences etc
+----------------------------------
+Add Sleep, Mutate and Teleport?
+
+Fix print_text so that it doesn't take the bg pointer
+Fix clear_bg so that it doesn't take the bg pointer, always clears text
+Change the "line of sight" so that it doesn't remove creatures, but treats them 
+as invisible.
+Add a square board? (OOOF!!)
+Selectable spells (how?)
+Themed sheet (undead, flying, woodland, erm)
+Lower manticore chance, Eagle 1 less movement
+
+Fix "press L and nothing moves" selection problem, oof it's a biggy..
+To get animation, would have to check a "selection_on" type flag
+Cursor is not animated
+No "still screen" mode
+and draw the inverted gfx instead of the usual ones. Or, while L
+is still pressed, copy the animation code and call the "hilight_" routine
+at intervals, simulating the main loop.
+
+check get_priority_val - seems to miss out part of the last row? grep 0x9 to see 
+In fact, maybe 0x9f should be 0xa0? or, even better, a define 0xa0?
+
+check order_table(7  - seems to miss off a value
+No, it is fine. Silly me.
+
+add the animation counter value (i.e. each thing will move at a different speed)
+currently uses a hacky "if (spell_vampire) then... else if ... else..."
+
+Add saving?
+Would need to save all tables + all wizard data + turns
+add a stopsound function to fix sound effect probs (gba only)
+add st fx (option for old/st/mixed)
+add the info screen bug? would have to be simulated for humans and fudged for cpu
+
+Cursor is not animated
+Add saving?  Would need to save all tables + all wizard data + turns
+Fix option screen to allow more options with scrolling.
+Extra options could be to turn individual bugs on and off?
+save/load options
+Add the ability for the cpu to dismount (see src/movement.c:473) 
+
+done:
+-----
+Show highlighted things in correct colour (mostly done!)
+Fix print_text so that it doesn't take the bg pointer
+Fix clear_bg so that it doesn't take the bg pointer, always clears text
+
+POSSIBLY FIXED THESE:
+-----------------------
+new fixes-
+show creature stats screen fixes 
+    selecting empty square was fading out needlessly
+    when the routine returns, redraws the square information
+after a creature with range attack melee attacks a square and fails, you had to move 
+the cursor before you could use range attack on the same square.
+squeezed the size to < 256kb :)
+
+
+
+new fix - magic missiles attacked fire and other stuff it shouldn't
+can't range attack castles, etc
+default to no spell selected, and if you don't select one it skips your turn
+added cpu turmoil
+added troll
+
+tried adding a fire attack preference to see if that effects movement?
+
+
+shadow wood - only get 1 of them?? I think this is fixed, need checking (wasn't setting tmp_cast_amount to 0 after prev spell)
+not fixed still happens for CPU wizards - I have tried setting the flags all over the place though, so should be fixed
+
+
+creature movement, after firing, the cursor appears again for cpu players. looks messy.
+in fact, the cursor shouldn't really appear for cpu players ever.
+
+
+attacking creature.. kill the creature and sometimes the dead one underneath is restored to life?
+dead zombies? not sure how that happens! seems to do with gooey blob... no idea how it happened...
+- turned of interupts on attacking, see if that fixes it
+
+
+contest drawn/won screen needs to clear border too, or use different palette for text
+world chaos counter not reset at end of game
+magic wood seems a bit eager to give spells
+
+if CPU wizard has shadow form, there are some CRAZY bugs.. 
+fixed by ending shadow form movement when the wiz enters castle/mount/something
+
+if wizard becomes engaged to enemy?
+
+scrolling bugs..
+doesnt scroll to higlight a movement or spell
+scrolling to position is wonky for certain locations - screen "too low" most of the time
+fire/gooeyblob spread - should scroll to show the spreading stuff.
+
+range attack a creature that is on a dead one. The dead one retruns to life!
+after range attack, the next creature can only move one square
+
+flying cpu creatures become engaged, something weird happens...
+they don't realize they're engaged and try selecting another square?
+
+the "movement range left" bug, where it stayed too long after the CPU wizard moved itself or creatures
+
+cpu turmoil
+option to turn off old bugs
+
+TO DO 
++++++++++++++++++++
+
+email other chaos fans...
+Ian Hancock <iandhancock@hotmail.com> - semi-wrote a GB version
+manuel herrera <kakhen@hotmail.com> - wrote to me with some gameplay ideas (new spells, no turn limits, etc)
+

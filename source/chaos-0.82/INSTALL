@@ -1,0 +1,80 @@
+
+CHAOS - THE BATTLE OF WIZARDS
+
+Installation
+--------------
+
+Unzip the chaos.exe file and run it.
+
+You will require the SDL.dll and SDL_net.dll either in the same directory as the 
+chaos.exe file, or somewhere in the PATH.
+
+Download from the SDL site, 
+http://www.libsdl.org/
+
+Then find
+Runtime Libraries: Win32
+
+Or get them from my site, which has the ones you need in one zip for Windows.
+
+
+GBA
+-----
+
+GBA version requires a flash card or similar "backup" device. It has been
+tested with a Flash Advance Pro 256M.  You will have to add the Nintendo header
+to the file, but most card writing software does this automatically. 
+
+Unzip the chaos.gba file and use the flashing software to write it to your card.
+
+
+
+Compiling
+---------
+
+chaos-n.nn.src.zip contains the "platform independent" source code for 
+Chaos - The Battle Of Wizards. If you want to recompile the game then you will 
+need:
+
+ * A "Unix-like" environment - MinSys/Cygwin on Windows, or Linux
+ * Sox - available from www.sourceforge.net
+ * gfx2gba - for the SDL version too - see www.gbadev.org, in the tools section
+   (make sure you get the tool by Markus! Other gfx2gbas won't work)
+
+GBA:
+ * DevkitArm - www.devkitarm.tk 
+ * My GBA library, available from http://www.geocities.com/quirky_2k1
+
+SDL:
+ * Gnu getopt_long. For Windows, this is available in libgw32c,
+ *                  on Linux it should be in (g)libc.
+ * The SDL/SDL net libraries, header files, etc
+
+
+To compile Chaos
+
+$ ./configure
+
+There are some options you can give to configure; `configure
+--help' will list them all.
+
+Then just:
+
+$ make
+
+and then
+
+$ make install
+
+if you want to place Chaos into the main directories on your system
+(under /usr/local by default, although you can change this with the
+--prefix argument to 'configure') you'll probably need to be root to
+do this bit.
+
+To compile for the GBA, use the following:
+
+$ ./configure --target=arm-elf  --with-gbalib=/path/to/libquirkygba --enable-sound
+
+You may have to specify the host (e.g. --host=i686 the type of machine you are running the
+cnfigure script on) as well as the target.
+

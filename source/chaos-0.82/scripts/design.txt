@@ -1,0 +1,141 @@
+
+Chaos (main.c)
+----------------
+GetInput                
+Start Screen            
+Options                 
+Player Creation
+Between Round Menu
+Arena
+    
+
+main () {
+  set up code
+  show start screen
+  while (1)
+    get input -> input will change the screen type
+    vsync
+}
+  
+    
+    
+GetInput (input.c)
+--------------
+get user input                    handle_keys() public
+Up, Down, Left, Right pressed     a_pressed(), b_pressed(), etc. private
+A pressed
+B pressed
+R pressed
+L pressed
+  - switch to function depending on current screen
+
+
+Start Screen (splash.c)
+-------------
+Show Screen                       show_splash()
+Select "item" (start or options)
+Choose item...
+                      done with up, down, start, a_pressed type calls
+Start (go to player creation)
+Options
+
+
+Options (options.c)
+-------------
+Show Options            show_options()
+Select Option           
+Change/Set Option
+                        will require up, down, left, right functions
+Finish
+
+Player Creation (players.c)
+------------------
+Show Screen         show_player_creation
+Select Player Count
+Select CPU Level
+Edit Player Name
+Edit Player Type (Human, CPU)
+Finish
+Generate Player Information (attributes, spells)
+
+
+Edit Player Name (editname.c ?)
+-----------------
+Show Screen         show_editname()
+Move Cursor
+Select Letter (including Delete, Finish)
+                    the traditional up, down calls here... called from GetInput
+Finish
+
+
+
+Between Round Menu (gamemenu.c)
+------------------
+Show Menu
+Show Spell List (Select and examine)
+View Arena
+Finish
+
+
+Spell Selection (spellselect.c)
+------------------
+Show Spell List      
+Hilite Spell
+Select Spell
+Spell Detail
+Select Illusion/Real
+Finish (go to next player or start arena round)
+
+Spell Detail      (details.c)
+--------------
+show detail screen
+show creature detail
+return
+
+Arena (arena.c)
+--------------
+Show Arena
+Cast Spell Round
+Move Cursor
+Movement Round
+Animate Screen
+Finish
+
+
+Cast Spell Round (casting.c, computer.c, magic.c)
+-----------------
+Choose Casting Location 
+Cast Player Spell (Check Can Cast - this is done in each spell routine)
+Info on square
+OR...
+Do AI spell choice/cast
+Finish
+
+
+
+Movement Round (movement.c, computer.c)
+----------------
+Select Square
+Check Location
+Info on square
+OR...
+Do AI movement
+Finish
+
+also used
+
+gfx.c
+sound.c
+
+plus data files (creatures.c etc)
+
+
+Artificial Intelligence (computer.c)
+---------------------------------------
+Do AI spell 
+    choice
+    cast
+Do AI movement
+
+    
+

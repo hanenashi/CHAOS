@@ -1,0 +1,124 @@
+version 0.81
+--------------
+Removed the "flickering" when checking line of sight
+Screen animates when highlighting a player's creations.
+Controls adjusted.
+
+
+
+version 0.80
+--------------
+Core changes:
+Added the ability for cpus to get off mounts. Consistent with
+the Speccy AI rules, i.e. only gets off the (non-flying) mount if
+a "better" position is available.
+Fixed the Troll stats - now they are the same as the original hidden Troll.
+Added the animation speed on a per-creature basis, like the original.
+
+
+SDL changes 
+Network code added - play online! (still very beta-ish)
+Screen size can be changed
+Full screen mode.
+Command line configuration options
+
+
+version 0.70
+-------------
+Core changes:
+Colour selection now correct on hilighted creatures.
+Tidied up some calls for consitency
+
+Porting update:
+Improved the build process to make it more flexible
+Preprocessor defines and SDL calls added for Win32 port
+
+version 0.68
+-------------
+An "Advance Wars"-inspired addition - pressing Select moves the cursor to
+your next creature (or wizard) yet to have moved.
+A couple of computer player changes:
+* wasteful Magic Castle casting fix
+* creatures no longer so "attracted" to Magic Fire+
+* illusions cast a bit more often and sensibly+
+* undead range-attack creatures will now range attack other undeads
+(+) - a possible improvement from the original AI
+Potential Info-screen text overflow sorted
+A few more well buried bugs fixed - all to do with Magic Fire/Gooey Blob spreading:
+* A mounted wizard was not killed by fire/blob.
+* Player 1 was immune to Magic Fire/Gooey Blob
+* Unridden mounts (Horses, etc) were Magic Fire resistant
+Plus really minor graphical and sound fixes.
+
+
+version 0.65
+Bug fixes for "Old Bugs OFF"
+* Disbelieving an illusionary creature did not destroy the creature.
+* Simililarly for Magic Bolts/Lightning - they had no effect.
+AI bug fix:
+* The CPU cast chance was not being calculated correctly, giving the game 
+  poor spell balance.  That's sorted now and the game plays a noticeably better.
+Lion graphics fixed - a frame had a pixel miscoloured and it was getting on my nerves
+
+
+version 0.6
+-----------
+Fixed the AI bug that caused cpu players to get stuck casting disbelieve.
+Fixed the "old bug", i.e. one of the optional bugs that can be switched off: 
+* Mounts never engaged to enemy if they carried a wizard. 
+  Now they can become engaged, unless the wizard is simply dismounting.
+
+version 0.5
+-----------
+Added Sleep Mode - next best thing to a save, I think.
+
+version 0.4
+-----------
+Creature and wizard stats screen fixes:
+*  selecting empty square was fading out needlessly
+*  When the Info screen returns, it now draws that square's information again
+After a creature with range attack melee attacks a square and fails, you had to move 
+the cursor before you could use range attack on the same square. Now fixed.
+Squeezed the size to < 256kb (by replacing sprintf() with smaller altenatives)
+
+version 0.3 
+-----------
+The only change is PogoShell support - Quit to PogoShell and
+custom icon file added. Quit to PogoShell is used from the "Options" screen.
+
+version 0.2
+-----------
+* The famous TROLL has been added
+* Option screen added
+* Added the option to turn off the old bugs. For the record, these fix the following:
+  *+ An illusionary creature swallowed then freed from Gooey Blob becomes real
+  *+ A wizard whose undead ridden mount is killed becomes undead (to get an undead mount,
+     cast raise dead on e.g. a horse's corpse) 
+  *+ Subverting a creature on a dead body causes the corpse to be reanimated
+  *+ Magic Bolt or Disbelieve a creature on a dead body removes the dead body too
+  *+ Magic Wood is not correctly placed in the top left corner, places three trees in a row
+* The number of rounds may be set to infinite, the default amount (15 + 2 * number of players) 
+  or any specific value up to 500.
+* The computer may cast Turmoil under the right circumstances
+* Screen scrolling improved slightly for computer creature movement.
+* Various AI bug fixes:
+  *+ When using Ranged attacks, would try and go for undead creatures too
+  *+ Magic Bolt targeted Magic Castles and Fires
+  *+ Shadow Wood "movement" was buggy
+  *+ Could ignore line of sight when casting Gooey Blob/Magic Fire
+* Other bug fixes/changes
+  *+ The player name edit screen the second time through had a graphical glitch
+  *+ When no spell is selected the game skips that players cast (previously
+     selected a "random" spell!)
+  *+ On a real GBA using Visoly's boot menu, the Video RAM was not properly cleared first.
+     This caused the game to be unplayable as the graphics were corrupted.
+  *+ Cosmetic touches to menus, etc
+  *+ Makefile changes so that "release" is the default build method
+
+Known differences from the original
+
+* The "info screen flicking to remove engaged to enemy" glitch is not present.
+* Highlighting creations highlights them in the owner's colour, rather than the creature colour.
+* Some soundfx are a bit crackly. Probably due to the WAV conversion program I used. 
+  Audacity doesn't seem to output unsigned 8 bit wavs :(
+* Can quit halfway through a game if there are just CPU players left.

@@ -1,0 +1,14 @@
+
+
+// 1 read in file
+// 2 get 2 bytes from address table e3e0
+// 3 get 22nd byte (decimal, 0x16 hex) from the offset in 2.
+// value 3 is the timer val
+// in psuedo code:
+sna = readFile("memdump.sna");
+for (index = 0; index < 61; index++) {
+  address = wordAt(0xe3e0+index*2);
+  timer = byteAt(address + 0x16)&0xff;
+  System.out.println(index+". "+timer);
+}
+

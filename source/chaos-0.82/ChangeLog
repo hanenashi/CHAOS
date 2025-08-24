@@ -1,0 +1,12 @@
+
+2005-08-09  Quirky  (quirky@zoom.co.uk)
+  * casting.c : speed of spell cast line made less variable
+  * configure.ac : debug mode switch, header tool
+
+2005-07-24  Quirky  (quirky@zoom.co.uk)
+  * Autoconf and automake scripts added
+  * gfx.c,arena.c: fixed flickering creatures when line of sight checked
+  * gfx.c,movement.c: scren animates when selecting player creations
+  * input.c: improved key repeats
+
+

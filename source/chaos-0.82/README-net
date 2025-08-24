@@ -1,0 +1,74 @@
+
+Quick start:
+------------
+
+Host: chaos -s
+(or Options, Net Play, Host, press 'D')
+Host must tell each client his IP address.
+
+Client: chaos -c <Host's IP Address>
+(or Options, Net Play, Connect, press 'D'. File chaos.ip contains Host's IP address)
+
+
+online mode
+-----------
+
+NB, when describing the keys, I use "GBA" terminology. So "the A key" is really
+the D on the keyboard! I really should sort that out...
+
+The beta online mode works as follows:
+
+Player 1 should be host - to become a "Host", either start the game: chaos -s
+or from the "OPTIONS" screen, go to Net Play, select HOST and press the A key
+(D on the keyboard then...) Then start a game as usual.
+
+Players 2+ should connect to the host. This is the tricky bit :(
+
+They need to know the IP of the host. For example, "172.21.39.00". The host
+must communicate his IP to each client using, e.g. email, IRC, MSN messenger... 
+Then each player starts chaos like this: chaos --connect=172.21.39.00
+replacing the IP value with the correct one as given by the host. 
+
+An alternative to the command line is to create a file called "chaos.ip" in the
+same directory as the main executable. Into this, write the IP address, and
+nothing else. This file is read when you try to connect. Go to the OPTIONS
+screen, Net Play, and select CONNECT - press A and wait. If all is well, the
+words show white, otherwise they will be red and the connection has failed...
+
+The Lobby
+---------
+
+When you start an online game, the "Lobby screen" replaces the usual "create
+players" screen.
+
+As Host: You can select the maximum number of players (2-8) and see who is
+connected and who is ready to play.  Your wizard is the first on the list. You
+may only chane the name, colour and image of this wizard.  When all players are
+ready, press start.
+
+As Client: Each client sees just his wizard. You may change the name, colour
+and image. When you've made your choice, press start.
+
+Spell Selection
+---------------
+
+After the Host starts, each player sees their "game menu" from which they can
+examine the board, choose their spell or continue the game. When a player
+chooses "Continue", they have to wait for everyone to finish their spell
+selection.
+
+Spell Casting 
+-------------
+
+This works the same as an offline game - each player casts his spell, and must
+wait while the other players cast theirs. 
+
+Movement
+--------
+
+Again, this is the same as in offline mode - each player moves his wizard and
+creatures, while the others wait for their turn.
+
+
+
+

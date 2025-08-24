@@ -1,0 +1,91 @@
+                          CHAOS - THE BATTLE OF WIZARDS
+                          Original game by Julian Gollop
+                     Gameboy Advance and SDL Versions by Quirky
+
+Controls
+--------
+For controls, see http://www.geocities.com/quirky_2k1/chaosgbacontrols.html,
+but try pressing A, B, R and L on the various screens.
+
+On the PC, the GBA controls are "emulated" using the directional arrows for the
+d-pad and A,S,D,F, Space, Enter for R, L, A, B, Start and Select.  Sorry! I'll
+get round to fixing this at some point.  Additionally, 1-4 and F5 change screen
+size and switch to full screen mode.
+
+Finally, here are the command line options (create a shortcut in Windows
+and add your favourites)
+
+Usage: chaos [OPTIONS]...
+
+Examples:
+ chaos --connect          # Connect to game, address from chaos.ip
+ chaos -c178.98.11.5      # Connect to host on the address 178.98.11.5
+ chaos -sx2 --full-screen # full screen mode, 2x scale, host a game
+
+If a long option shows an argument as mandatory, then it is mandatory
+for the equivalent short option also.  Similarly for optional arguments.
+
+Display options:
+-f, --full-screen       Run in full screen mode
+-x, --scale=SCALE       Set scale 1x - 3x
+    --scale-1
+    --scale-2
+    --scale-3
+-i, --icon=SPELL        Set application icon to the spell number.
+                        Accepts values from 2 to 41 inclusive.
+
+Gameplay options:
+-o, --old-bugs=on       Set old bugs 'on' or 'off'
+    --on
+    --off
+-r, --rounds=ROUNDS     Set number of rounds played:
+    --forever            0    infinite rounds
+                         1    players*2+15 rounds (default)
+                         any  maximum rounds (e.g. 25)
+
+Network options:
+-c, --connect[=IP]      Connect to an online host.
+                        By default, connects to address in chaos.ip
+                        If that file can't be found, 'localhost' is used.
+                        Optional IP address argument is given priority.
+-p, --port=PORT         Use non-zero PORT as the
+                        connection port (default 1999)
+-s, --host              Start hosting an online game
+
+
+About
+------
+
+This was the my second attempt at a remake of Chaos for the Gameboy Advance.
+The first was a "clone" based on playing the game in emulators and mimicking
+the gameplay. This version has been made by reverse engineering the original
+Z80 source code and converting the code to C. About 75% of the game is based on
+the reversed engineered code, the rest is for the UI and GBA specific stuff.
+
+
+chaos-n.nn.X.zip contains a compiled version of the code designed to run on:
+
+X = gba = Gameboy Advance using a flash card or similar "backup" device.
+X = exe = Windows. Requires the SDL dll files. 
+
+See INSTALL for more details. 
+
+Credits
+--------
+Original Chaos game by Julian Gollop.
+
+WinZ80 disassembler/debugger by Gerton Lunter.
+
+GBA sound FX code by Uze from http://www.belogic.com. 
+Wav to raw sound conversion by Sox
+Graphics conversion tool by Markus.
+
+Links
+------
+www.libsdl.org
+www.gbadev.org
+sox.sourceforge.net
+www.worldofspectrum.org
+www.geocities.com/quirky_2k1
+
+
