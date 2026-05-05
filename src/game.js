@@ -1,4 +1,5 @@
 import {seededRng} from './rng.js';
+import {createLogger} from './log.js';
 
 /** Minimal board+movement prototype.
  * Board: 15x10 grid; two wizards (P1 at (1,1), P2 at (13,8)).
@@ -6,10 +7,11 @@ import {seededRng} from './rng.js';
  * End Turn advances current player.
  */
 export class Game {
-  constructor(canvas, onUpdate){
+  constructor(canvas, onUpdate, options = {}){
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
     this.onUpdate = onUpdate || (()=>{});
+    this.logger = options.logger || createLogger({name:'game', level:'debug'});
 
     this.state = Game.initialState();
     this.scale = 48; // px/tile
@@ -19,6 +21,7 @@ export class Game {
     this.selectedId = null;
     this.onLocalAction = null;
 
+    this.logger.info('game.init', {width: this.state.width, height: this.state.height});
     this._bindInput();
     this._loop();
   }
@@ -112,7 +115,7 @@ export class Game {
     const onMove = (e)=>{
       const rect = c.getBoundingClientRect();
       const px = (e.touches?e.touches[0].clientX:e.clientX) - rect.left;
-      const py = (e.touches?e.touches[0].clientY)e.touches[0].clientY - rect.top;
+      const py = (e.touches?e.touches[0].clientY:e.clientY) - rect.top;
       if (this.drag){
         const dx = px - this.drag.px;
         const dy = py - this.drag.py;
@@ -144,6 +147,7 @@ export class Game {
         } else if (u){
           const dist = Math.abs(u.x-g.x) + Math.abs(u.y-g.y);
           if (dist===1 && !u.moved){
+            this.logger.debug('game.intent.move', {id:u.id, from:{x:u.x,y:u.y}, to:g});
             this._applyLocalAction({type:'MOVE', id:u.id, x:g.x, y:g.y});
           }
         }
@@ -176,6 +180,7 @@ export class Game {
   }
 
   _applyLocalAction(a){
+    this.logger.debug('game.action.dispatch', {action: a, remote: Boolean(this.onLocalAction)});
     if (this.onLocalAction){
       this.onLocalAction(a);
       return;
@@ -184,23 +189,29 @@ export class Game {
   }
 
   applyAction(a){
+    const before = this.getState();
     switch(a.type){
       case 'MOVE': {
         const u = this.state.units.find(x=>x.id===a.id);
-        if (!u) return;
-        if (u.owner!==this.state.currentPlayer || u.moved) return;
+        if (!u){ this.logger.warn('game.move.rejected', {reason:'unit_missing', action:a}); return; }
+        if (u.owner!==this.state.currentPlayer || u.moved){ this.logger.warn('game.move.rejected', {reason:'not_current_player_or_moved', action:a}); return; }
         const occupied = this.state.units.some(x=>x.x===a.x && x.y===a.y);
         const dist = Math.abs(u.x-a.x) + Math.abs(u.y-a.y);
         if (!occupied && dist===1){
           u.x=a.x; u.y=a.y; u.moved=true;
+          this.logger.info('game.move.applied', {id:u.id, to:{x:a.x,y:a.y}});
+        } else {
+          this.logger.warn('game.move.rejected', {reason:'occupied_or_distance', occupied, dist, action:a});
         }
         break;
       }
       case 'END_TURN': {
+        this.logger.info('game.turn.end_requested', {currentPlayer: this.state.currentPlayer, turn: this.state.turn});
         this.endTurn();
         break;
       }
     }
+    this.logger.debug('game.state.changed', {action: a.type, before:{turn:before.turn,currentPlayer:before.currentPlayer}, after:{turn:this.state.turn,currentPlayer:this.state.currentPlayer}});
     this.onUpdate();
   }
 
@@ -214,5 +225,5 @@ export class Game {
   }
 
   getState(){ return JSON.parse(JSON.stringify(this.state)); }
-  loadState(s){ this.state = s; this.selectedId = null; }
+  loadState(s){ this.state = s; this.selectedId = null; this.logger.debug('game.state.loaded', {turn:s.turn, currentPlayer:s.currentPlayer}); }
 }
