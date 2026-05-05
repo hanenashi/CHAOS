@@ -1,24 +1,29 @@
+import {createLogger} from './log.js';
 // Minimal WebSocket client with room/lockstep actions
 export class NetClient{
-  constructor(url){
+  constructor(url, logger){
     this.url = url;
     this.ws = null;
     this.handlers = {};
     this.connected = false;
     this.room = null;
+    this.logger = logger || createLogger({name:'net', level:'debug'});
   }
   on(type, fn){ this.handlers[type]=fn; }
   _emit(type, payload){ if (this.handlers[type]) this.handlers[type](payload); }
 
   async connect(){
+    this.logger.info('net.connect.start', {url:this.url});
     this.ws = new WebSocket(this.url);
     await new Promise((res,rej)=>{
       this.ws.onopen = ()=>res();
       this.ws.onerror = (e)=>rej(e);
     });
     this.connected = true;
+    this.logger.info('net.connect.open');
     this.ws.onmessage = (ev)=>{
       const msg = JSON.parse(ev.data);
+      this.logger.debug('net.message.received', {type: msg.type});
       if (msg.type==='state') this._emit('state', msg.state);
       if (msg.type==='action') this._emit('action', msg.action);
       if (msg.type==='error') alert('Server: '+msg.message);
@@ -26,18 +31,21 @@ export class NetClient{
   }
   async host(room){
     this.room = room;
+    this.logger.info('net.host.request', {room});
     this.ws.send(JSON.stringify({type:'host', room}));
     const ok = await this._awaitOnce('hosted');
     return ok && ok.ok;
   }
   async join(room){
     this.room = room;
+    this.logger.info('net.join.request', {room});
     this.ws.send(JSON.stringify({type:'join', room}));
     const ok = await this._awaitOnce('joined');
     return ok && ok.ok;
   }
-  close(){ this.ws?.close(); this.connected=false; }
+  close(){ this.logger.info('net.close'); this.ws?.close(); this.connected=false; }
   sendAction(action){
+    this.logger.debug('net.action.send', {room:this.room, action});
     this.ws.send(JSON.stringify({type:'action', room:this.room, action}));
   }
   _awaitOnce(expect){

@@ -2,8 +2,10 @@
 // Run: `npm init -y && npm i ws && node server.js`
 const WebSocket = require('ws');
 const http = require('http');
+const {createLogger} = require('./logger');
 
 const PORT = 8787;
+const logger = createLogger({name:'ws-server'});
 const wss = new WebSocket.Server({ noServer: true });
 
 const rooms = new Map();
@@ -25,6 +27,7 @@ function initialState(){
 }
 
 function broadcast(room, msg){
+  logger.debug('room.broadcast', {room: room.id, type: msg.type, players: room.players.length});
   for (const p of room.players){
     if (p.ws.readyState===WebSocket.OPEN){
       p.ws.send(JSON.stringify(msg));
@@ -40,18 +43,22 @@ server.on('upgrade', (req, socket, head) => {
 });
 
 wss.on('connection', (ws) => {
+  logger.info('ws.connection.open');
   let currentRoom = null;
   ws.on('message', (data) => {
     let msg;
-    try { msg = JSON.parse(data); } catch { return; }
+    try { msg = JSON.parse(data); } catch { logger.warn('ws.message.invalid_json'); return; }
+    logger.debug('ws.message.received', {type: msg.type});
 
     if (msg.type==='host'){
       const {room} = msg;
       if (rooms.has(room)){
+        logger.warn('room.host.rejected_exists', {room});
         ws.send(JSON.stringify({type:'hosted', ok:false, reason:'exists'}));
         return;
       }
       const r = { id: room, players: [{ws, id:0}], state: initialState() };
+      logger.info('room.host.created', {room});
       rooms.set(room, r);
       currentRoom = r;
       ws.send(JSON.stringify({type:'hosted', ok:true}));
@@ -63,10 +70,12 @@ wss.on('connection', (ws) => {
       const {room} = msg;
       const r = rooms.get(room);
       if (!r || r.players.length>=2){
+        logger.warn('room.join.rejected', {room, reason: !r ? 'missing' : 'full'});
         ws.send(JSON.stringify({type:'joined', ok:false}));
         return;
       }
       r.players.push({ws, id:1});
+      logger.info('room.join.accepted', {room, players: r.players.length});
       currentRoom = r;
       ws.send(JSON.stringify({type:'joined', ok:true}));
       ws.send(JSON.stringify({type:'state', state: r.state}));
@@ -75,18 +84,22 @@ wss.on('connection', (ws) => {
 
     if (msg.type==='action'){
       const r = rooms.get(msg.room);
-      if (!r) return;
+      if (!r){ logger.warn('room.action.rejected_missing_room', {room: msg.room}); return; }
+      logger.debug('room.action.apply.start', {room: msg.room, action: msg.action});
       applyAction(r.state, msg.action);
+      logger.debug('room.action.apply.done', {room: msg.room, turn: r.state.turn, currentPlayer: r.state.currentPlayer});
       broadcast(r, {type:'state', state: r.state});
       return;
     }
   });
 
   ws.on('close', ()=>{
+    logger.info('ws.connection.close');
     if (currentRoom){
       currentRoom.players = currentRoom.players.filter(p=>p.ws!==ws);
       if (currentRoom.players.length===0){
         rooms.delete(currentRoom.id);
+        logger.info('room.deleted_empty', {room: currentRoom.id});
       }
     }
   });
@@ -96,16 +109,20 @@ function applyAction(state, a){
   switch(a.type){
     case 'MOVE': {
       const u = state.units.find(x=>x.id===a.id);
-      if (!u) return;
-      if (u.owner!==state.currentPlayer || u.moved) return;
+      if (!u){ logger.warn('rules.move.rejected', {reason:'unit_missing', action:a}); return; }
+      if (u.owner!==state.currentPlayer || u.moved){ logger.warn('rules.move.rejected', {reason:'not_current_player_or_moved', action:a}); return; }
       const occupied = state.units.some(x=>x.x===a.x && x.y===a.y);
       const dist = Math.abs(u.x-a.x) + Math.abs(u.y-a.y);
       if (!occupied && dist===1){
         u.x=a.x; u.y=a.y; u.moved=true;
+        logger.info('rules.move.applied', {id:u.id, to:{x:a.x,y:a.y}});
+      } else {
+        logger.warn('rules.move.rejected', {reason:'occupied_or_distance', occupied, dist, action:a});
       }
       break;
     }
     case 'END_TURN': {
+      logger.info('rules.turn.end', {turn: state.turn, currentPlayer: state.currentPlayer});
       for (const u of state.units){
         if (u.owner===state.currentPlayer) u.moved=false;
       }
@@ -117,5 +134,5 @@ function applyAction(state, a){
 }
 
 server.listen(PORT, () => {
-  console.log('WS server on', PORT);
+  logger.info('server.started', {port: PORT});
 });
