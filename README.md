@@ -7,7 +7,7 @@ Current scope:
 - Basic 2-player online play via WebSockets.
 - Prototype movement/turn loop with minimal rules.
 
-No original *Chaos* assets are included.
+Converted sprite assets are included under `assets/` for local prototyping.
 
 ---
 
@@ -16,6 +16,7 @@ No original *Chaos* assets are included.
 The project currently includes:
 
 - **Canvas client** (`index.html`, `main.js`, `src/game.js`) for rendering and input.
+- **Converted sprite assets** (`assets/*.png`, `assets/manifest.json`) loaded from the extracted PCX source art.
 - **Minimal rules loop** with two wizards, one-tile orthogonal movement, and end-turn logic.
 - **Simple WebSocket room server** (`server/server.js`) for host/join and authoritative action application.
 
@@ -25,6 +26,7 @@ The project currently includes:
 - Starting units: 2 wizards (one per player).
 - Legal move: one orthogonal tile into an unoccupied destination.
 - End turn: swaps current player and increments turn counter.
+- Cast button: test-spawns converted sprite assets onto the board.
 
 ### Not yet implemented
 
@@ -53,10 +55,8 @@ Open:
 In a second terminal:
 
 ```bash
-cd server
-npm init -y
-npm i ws
-node server.js
+npm install
+npm run server
 ```
 
 Server default port: `8787`.

@@ -1,10 +1,30 @@
 *{box-sizing:border-box}
-html,body{margin:0;height:100%;background:#111;color:#ddd;font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
-#topbar,#bottombar{display:flex;justify-content:space-between;align-items:center;padding:.5rem .75rem;background:#1b1b1b;border-bottom:1px solid #2a2a2a}
-#bottombar{position:fixed;bottom:0;left:0;right:0;border-top:1px solid #2a2a2a;border-bottom:none}
-#topbar{position:fixed;top:0;left:0;right:0;z-index:2}
-#game{position:fixed;top:48px;bottom:48px;left:0;right:0;margin:auto;display:block;background:#0b0b0b}
-button{background:#2c2c2c;border:1px solid #3a3a3a;color:#ddd;padding:.4rem .7rem;border-radius:.5rem;cursor:pointer}
+*:where(:not(input, textarea)){user-select:none;-webkit-user-select:none}
+:root{
+  --bg:#0e0e0f;
+  --panel:#141416;
+  --text:#e6e6e9;
+  --muted:#8c8c94;
+  --accent:#6ee7ff;
+  --line:#26262a;
+}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+body{display:grid;grid-template-rows:auto 1fr auto;grid-template-columns:100%}
+#topbar,#bottombar{display:flex;justify-content:space-between;align-items:center;gap:.75rem;padding:.5rem .75rem;background:var(--panel);border-bottom:1px solid var(--line)}
+#bottombar{position:sticky;bottom:0;z-index:2;border-top:1px solid var(--line);border-bottom:none}
+#topbar{position:sticky;top:0;z-index:2}
+#topbar .left,#topbar .right,#bottombar .left,#bottombar .right{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+#stage{position:relative;overflow:hidden;min-height:calc(100vh - 96px)}
+#game{display:block;width:100%;height:calc(100vh - 96px);background:#0b0b0b;image-rendering:pixelated;image-rendering:crisp-edges;outline:none}
+button{background:#1a1b1e;border:1px solid var(--line);color:var(--text);padding:.4rem .7rem;border-radius:.5rem;cursor:pointer}
+button:hover{background:#212226}
 button:disabled{opacity:.5;cursor:not-allowed}
-#modeLabel{margin-left:.5rem;color:#7ad}
-input{background:#151515;color:#ddd;border:1px solid #333;border-radius:.4rem;padding:.35rem .5rem}
+#modeLabel{margin-left:.5rem;color:var(--accent)}
+#turnInfo,#hint{color:var(--muted)}
+input{background:#0f0f12;color:var(--text);border:1px solid var(--line);border-radius:.4rem;padding:.35rem .5rem}
+
+@media (max-width:720px){
+  #topbar,#bottombar{align-items:flex-start;flex-direction:column}
+  #bottombar .right{text-align:left}
+  input{max-width:100%}
+}

@@ -26,6 +26,15 @@ const logger = createLogger({name:'client', level:'debug'});
 logger.addSink(memorySink);
 const game = new Game(canvas, updateUI, {logger: logger.child('game')});
 let net = null;
+let manifest = [];
+
+async function getManifest(){
+  if (manifest.length > 0) return manifest;
+  const res = await fetch('./assets/manifest.json');
+  if (!res.ok) throw new Error('assets/manifest.json missing');
+  manifest = await res.json();
+  return manifest;
+}
 
 function updateUI() {
   turnInfo.textContent = `Turn: P${game.state.currentPlayer+1} · Phase: ${game.state.phase}`;
@@ -41,7 +50,44 @@ endTurnBtn.addEventListener('click', () => {
   }
 });
 
-castBtn.addEventListener('click', () => alert('Spell casting is a stub in this prototype.'));
+castBtn.addEventListener('click', async () => {
+  logger.debug('ui.cast_clicked', {online: Boolean(net && net.connected)});
+  let entries;
+  try {
+    entries = await getManifest();
+  } catch (err) {
+    logger.error('ui.cast_failed', {message: String(err)});
+    alert('Sprite manifest missing. Expected assets/manifest.json.');
+    return;
+  }
+
+  const skip = new Set([
+    'cursor', 'cursor_engaged', 'cursor_fire', 'cursor_fly',
+    'cursor_ground', 'cursor_spell', 'chaosfont', 'bg', 'spell'
+  ]);
+  const usable = entries.filter(e => !skip.has(e.id));
+  let spawned = 0;
+  let x = 0;
+  let y = 0;
+
+  for (const entry of usable) {
+    while (y < game.state.height && game.state.units.some(u => u.x === x && u.y === y)) {
+      x += 1;
+      if (x >= game.state.width) { x = 0; y += 1; }
+    }
+    if (y >= game.state.height) break;
+
+    const action = {type:'SPAWN', spriteId: entry.id, x, y, owner:-1, unitType:'test'};
+    if (net && net.connected) net.sendAction(action);
+    else game.applyAction(action);
+    spawned += 1;
+    x += 1;
+    if (x >= game.state.width) { x = 0; y += 1; }
+  }
+
+  modeLabel.textContent = `SPAWNED ${spawned}`;
+  logger.info('ui.cast_spawned_sprites', {spawned});
+});
 
 copyLogsBtn.addEventListener('click', async () => {
   const dump = JSON.stringify(clientLogs, null, 2);
