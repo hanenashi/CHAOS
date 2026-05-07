@@ -1,5 +1,7 @@
 # CHAOS — Web Prototype
 
+https://hanenashi.github.io/CHAOS/
+
 CHAOS is a browser-based prototype of a turn-based tactical game inspired by *Chaos*.
 
 Current scope:
