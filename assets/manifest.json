@@ -1,0 +1,538 @@
+﻿[
+    {
+        "id":  "armour",
+        "path":  "assets/armour.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  4,
+        "idleFrames":  4
+    },
+    {
+        "id":  "bat",
+        "path":  "assets/bat.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  5,
+        "idleFrames":  4
+    },
+    {
+        "id":  "bear",
+        "path":  "assets/bear.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  5,
+        "idleFrames":  4
+    },
+    {
+        "id":  "bg",
+        "path":  "assets/bg.png",
+        "frameW":  8,
+        "frameH":  8,
+        "frames":  4,
+        "idleFrames":  4
+    },
+    {
+        "id":  "bolt_anim",
+        "path":  "assets/bolt_anim.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  8,
+        "idleFrames":  8
+    },
+    {
+        "id":  "bow",
+        "path":  "assets/bow.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  4,
+        "idleFrames":  4
+    },
+    {
+        "id":  "centaur",
+        "path":  "assets/centaur.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  5,
+        "idleFrames":  4
+    },
+    {
+        "id":  "chaosfont",
+        "path":  "assets/chaosfont.png",
+        "frameW":  8,
+        "frameH":  8,
+        "frames":  170,
+        "idleFrames":  170
+    },
+    {
+        "id":  "crocodile",
+        "path":  "assets/crocodile.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  5,
+        "idleFrames":  4
+    },
+    {
+        "id":  "cursor",
+        "path":  "assets/cursor.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  1,
+        "idleFrames":  1
+    },
+    {
+        "id":  "cursor_engaged",
+        "path":  "assets/cursor_engaged.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  1,
+        "idleFrames":  1
+    },
+    {
+        "id":  "cursor_fire",
+        "path":  "assets/cursor_fire.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  1,
+        "idleFrames":  1
+    },
+    {
+        "id":  "cursor_fly",
+        "path":  "assets/cursor_fly.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  1,
+        "idleFrames":  1
+    },
+    {
+        "id":  "cursor_ground",
+        "path":  "assets/cursor_ground.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  1,
+        "idleFrames":  1
+    },
+    {
+        "id":  "cursor_spell",
+        "path":  "assets/cursor_spell.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  1,
+        "idleFrames":  1
+    },
+    {
+        "id":  "dark_citadel",
+        "path":  "assets/dark_citadel.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  4,
+        "idleFrames":  4
+    },
+    {
+        "id":  "dire_wolf",
+        "path":  "assets/dire_wolf.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  5,
+        "idleFrames":  4
+    },
+    {
+        "id":  "disappear",
+        "path":  "assets/disappear.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  7,
+        "idleFrames":  6
+    },
+    {
+        "id":  "dragon_golden",
+        "path":  "assets/dragon_golden.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  5,
+        "idleFrames":  4
+    },
+    {
+        "id":  "dragon_green",
+        "path":  "assets/dragon_green.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  5,
+        "idleFrames":  4
+    },
+    {
+        "id":  "dragon_red",
+        "path":  "assets/dragon_red.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  5,
+        "idleFrames":  4
+    },
+    {
+        "id":  "eagle",
+        "path":  "assets/eagle.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  5,
+        "idleFrames":  4
+    },
+    {
+        "id":  "elf",
+        "path":  "assets/elf.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  5,
+        "idleFrames":  4
+    },
+    {
+        "id":  "faun",
+        "path":  "assets/faun.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  5,
+        "idleFrames":  4
+    },
+    {
+        "id":  "fight",
+        "path":  "assets/fight.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  4,
+        "idleFrames":  3
+    },
+    {
+        "id":  "fire_anim",
+        "path":  "assets/fire_anim.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  8,
+        "idleFrames":  8
+    },
+    {
+        "id":  "ghost",
+        "path":  "assets/ghost.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  4,
+        "idleFrames":  3
+    },
+    {
+        "id":  "giant",
+        "path":  "assets/giant.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  5,
+        "idleFrames":  4
+    },
+    {
+        "id":  "giant_rat",
+        "path":  "assets/giant_rat.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  5,
+        "idleFrames":  4
+    },
+    {
+        "id":  "goblin",
+        "path":  "assets/goblin.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  5,
+        "idleFrames":  4
+    },
+    {
+        "id":  "gooey_blob",
+        "path":  "assets/gooey_blob.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  4,
+        "idleFrames":  3
+    },
+    {
+        "id":  "gorilla",
+        "path":  "assets/gorilla.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  5,
+        "idleFrames":  4
+    },
+    {
+        "id":  "gryphon",
+        "path":  "assets/gryphon.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  5,
+        "idleFrames":  4
+    },
+    {
+        "id":  "harpy",
+        "path":  "assets/harpy.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  5,
+        "idleFrames":  4
+    },
+    {
+        "id":  "horse",
+        "path":  "assets/horse.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  5,
+        "idleFrames":  4
+    },
+    {
+        "id":  "hydra",
+        "path":  "assets/hydra.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  5,
+        "idleFrames":  4
+    },
+    {
+        "id":  "king_cobra",
+        "path":  "assets/king_cobra.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  5,
+        "idleFrames":  4
+    },
+    {
+        "id":  "knife",
+        "path":  "assets/knife.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  4,
+        "idleFrames":  4
+    },
+    {
+        "id":  "lion",
+        "path":  "assets/lion.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  5,
+        "idleFrames":  4
+    },
+    {
+        "id":  "magic_castle",
+        "path":  "assets/magic_castle.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  4,
+        "idleFrames":  4
+    },
+    {
+        "id":  "magic_fire",
+        "path":  "assets/magic_fire.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  4,
+        "idleFrames":  4
+    },
+    {
+        "id":  "magic_wood",
+        "path":  "assets/magic_wood.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  4,
+        "idleFrames":  4
+    },
+    {
+        "id":  "manticore",
+        "path":  "assets/manticore.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  5,
+        "idleFrames":  4
+    },
+    {
+        "id":  "ogre",
+        "path":  "assets/ogre.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  5,
+        "idleFrames":  4
+    },
+    {
+        "id":  "orc",
+        "path":  "assets/orc.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  5,
+        "idleFrames":  4
+    },
+    {
+        "id":  "pegasus",
+        "path":  "assets/pegasus.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  5,
+        "idleFrames":  4
+    },
+    {
+        "id":  "shadow_wood",
+        "path":  "assets/shadow_wood.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  4,
+        "idleFrames":  4
+    },
+    {
+        "id":  "shield",
+        "path":  "assets/shield.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  4,
+        "idleFrames":  4
+    },
+    {
+        "id":  "skeleton",
+        "path":  "assets/skeleton.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  4,
+        "idleFrames":  3
+    },
+    {
+        "id":  "spectre",
+        "path":  "assets/spectre.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  4,
+        "idleFrames":  3
+    },
+    {
+        "id":  "spell",
+        "path":  "assets/spell.png",
+        "frameW":  8,
+        "frameH":  8,
+        "frames":  36,
+        "idleFrames":  35
+    },
+    {
+        "id":  "sword",
+        "path":  "assets/sword.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  4,
+        "idleFrames":  4
+    },
+    {
+        "id":  "troll",
+        "path":  "assets/troll.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  5,
+        "idleFrames":  4
+    },
+    {
+        "id":  "unicorn",
+        "path":  "assets/unicorn.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  5,
+        "idleFrames":  4
+    },
+    {
+        "id":  "vampire",
+        "path":  "assets/vampire.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  4,
+        "idleFrames":  3
+    },
+    {
+        "id":  "wall",
+        "path":  "assets/wall.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  4,
+        "idleFrames":  4
+    },
+    {
+        "id":  "wings",
+        "path":  "assets/wings.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  4,
+        "idleFrames":  4
+    },
+    {
+        "id":  "wiz1",
+        "path":  "assets/wiz1.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  4,
+        "idleFrames":  3
+    },
+    {
+        "id":  "wiz2",
+        "path":  "assets/wiz2.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  4,
+        "idleFrames":  3
+    },
+    {
+        "id":  "wiz3",
+        "path":  "assets/wiz3.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  4,
+        "idleFrames":  3
+    },
+    {
+        "id":  "wiz4",
+        "path":  "assets/wiz4.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  4,
+        "idleFrames":  3
+    },
+    {
+        "id":  "wiz5",
+        "path":  "assets/wiz5.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  4,
+        "idleFrames":  3
+    },
+    {
+        "id":  "wiz6",
+        "path":  "assets/wiz6.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  4,
+        "idleFrames":  3
+    },
+    {
+        "id":  "wiz7",
+        "path":  "assets/wiz7.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  4,
+        "idleFrames":  3
+    },
+    {
+        "id":  "wiz8",
+        "path":  "assets/wiz8.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  4,
+        "idleFrames":  3
+    },
+    {
+        "id":  "wraith",
+        "path":  "assets/wraith.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  4,
+        "idleFrames":  3
+    },
+    {
+        "id":  "zombie",
+        "path":  "assets/zombie.png",
+        "frameW":  16,
+        "frameH":  16,
+        "frames":  4,
+        "idleFrames":  3
+    }
+]

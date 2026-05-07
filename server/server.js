@@ -19,8 +19,8 @@ function initialState(){
     height: 10,
     tiles: Array(15*10).fill(0),
     units: [
-      {id:1, owner:0, type:'wizard', x:1, y:1, moved:false, mp:1, hp:5},
-      {id:2, owner:1, type:'wizard', x:13, y:8, moved:false, mp:1, hp:5},
+      {id:1, owner:0, type:'wizard', spriteId:'wiz1', x:1, y:1, moved:false, mp:1, hp:5},
+      {id:2, owner:1, type:'wizard', spriteId:'wiz2', x:13, y:8, moved:false, mp:1, hp:5},
     ],
     currentPlayer: 0
   };
@@ -128,6 +128,30 @@ function applyAction(state, a){
       }
       state.currentPlayer = (state.currentPlayer+1)%2;
       state.turn+=1;
+      break;
+    }
+    case 'SPAWN': {
+      if (a.x < 0 || a.y < 0 || a.x >= state.width || a.y >= state.height){
+        logger.warn('rules.spawn.rejected', {reason:'out_of_bounds', action:a});
+        return;
+      }
+      const occupied = state.units.some(x=>x.x===a.x && x.y===a.y);
+      if (occupied){
+        logger.warn('rules.spawn.rejected', {reason:'occupied', action:a});
+        return;
+      }
+      const id = Math.max(0, ...state.units.map(u=>u.id)) + 1;
+      state.units.push({
+        id,
+        owner: a.owner ?? -1,
+        type: a.unitType ?? 'summon',
+        spriteId: a.spriteId,
+        x: a.x,
+        y: a.y,
+        moved: false,
+        hp: 1
+      });
+      logger.info('rules.spawn.applied', {id, spriteId: a.spriteId, to:{x:a.x,y:a.y}});
       break;
     }
   }
