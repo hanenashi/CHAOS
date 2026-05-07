@@ -6,6 +6,7 @@ const canvas = document.getElementById('game');
 const endTurnBtn = document.getElementById('endTurnBtn');
 const castBtn = document.getElementById('castBtn');
 const turnInfo = document.getElementById('turnInfo');
+const copyLogsBtn = document.getElementById('copyLogsBtn');
 const modeLabel = document.getElementById('modeLabel');
 
 const hostBtn = document.getElementById('hostBtn');
@@ -13,7 +14,16 @@ const joinBtn = document.getElementById('joinBtn');
 const leaveBtn = document.getElementById('leaveBtn');
 const roomInput = document.getElementById('roomId');
 
+const clientLogs = [];
+const MAX_CLIENT_LOGS = 500;
+const memorySink = (record) => {
+  clientLogs.push(record);
+  if (clientLogs.length > MAX_CLIENT_LOGS) clientLogs.shift();
+  window.__chaosLogs = clientLogs;
+};
+
 const logger = createLogger({name:'client', level:'debug'});
+logger.addSink(memorySink);
 const game = new Game(canvas, updateUI, {logger: logger.child('game')});
 let net = null;
 
@@ -32,6 +42,18 @@ endTurnBtn.addEventListener('click', () => {
 });
 
 castBtn.addEventListener('click', () => alert('Spell casting is a stub in this prototype.'));
+
+copyLogsBtn.addEventListener('click', async () => {
+  const dump = JSON.stringify(clientLogs, null, 2);
+  try {
+    await navigator.clipboard.writeText(dump);
+    logger.info('ui.copy_logs.success', {entries: clientLogs.length});
+    alert(`Copied ${clientLogs.length} log entries to clipboard.`);
+  } catch (err) {
+    logger.error('ui.copy_logs.failed', {message: String(err)});
+    alert('Failed to copy logs. Open DevTools and use window.__chaosLogs instead.');
+  }
+});
 
 // --- Networking hooks ---
 hostBtn.addEventListener('click', async () => {
